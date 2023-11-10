@@ -1,0 +1,145 @@
+html>
+
+<html
+ 
+lang="en">
+
+<head>
+
+  
+<meta
+ 
+charset="UTF-8">
+
+  
+<meta
+ 
+name="viewport"
+ 
+content="width=device-width, initial-scale=1.0">
+
+  
+<title>Survey Form</title>
+
+  
+<link
+ 
+rel="stylesheet"
+ 
+href="style.css">
+
+</head>
+
+<body>
+  <header>
+    <h1>Survey Form</h1>
+  </header>
+
+  <main>
+    <form action="/survey" method="post">
+      <fieldset>
+
+        
+<legend>Personal Information</legend>
+
+
+        
+<label
+ 
+for="first_name">First name:</label>
+
+        
+<input
+ 
+type="text"
+ 
+name="first_name"
+ 
+id="first_name"
+ 
+required>
+
+
+        
+<label
+ 
+for="last_name">Last name:</label>
+
+        
+<input
+ 
+type="text"
+ 
+name="last_name"
+ 
+id="last_name"
+ 
+required>
+
+
+        
+<label
+ 
+for="age">Age:</label>
+
+        
+<input
+ 
+type="number" name="age" id="age" required>
+
+        <label for="email">Email address:</label>
+        <input type="email" name="email" id="email" required>
+      </fieldset>
+
+      <fieldset>
+        <legend>Additional Information</legend>
+
+        <label for="occupation">Occupation:</label>
+        <input type="text" name="occupation" id="occupation">
+
+        <label for="location">Location:</label>
+        <input type="text" name="location" id="location">
+
+        <label for="comments">Additional comments:</label>
+        <textarea name="comments" id="comments" rows="5" cols="30"></textarea>
+      </fieldset>
+
+      <input type="submit" value="Submit">
+    </form>
+  </main>
+</body>
+</html>
+body {
+  font-family: sans-serif;
+}
+
+header {
+  text-align: center;
+}
+
+form {
+  width: 500px;
+  margin: 0 auto;
+}
+
+fieldset {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+legend {
+  font-weight: bold;
+}
+
+input, textarea {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+input[type="submit"] {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
