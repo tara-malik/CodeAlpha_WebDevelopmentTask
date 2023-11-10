@@ -1,0 +1,133 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+const pdfkit = require('pdfkit');
+
+const app = express();
+
+app.use(bodyParser.json());
+
+app.post('/generate-resume', async (req, res) => {
+  const { name, email, phone, skills, experience } = req.body;
+
+  const doc = new pdfkit();
+
+  doc.text(name, { align: 'center', fontSize: 20 });
+  doc.text(email, { align: 'center', fontSize: 16 });
+  doc.text(phone, { align: 'center', fontSize: 16 });
+
+  doc.text('Skills', { align: 'left', fontSize: 18 });
+  for (const skill of skills) {
+    doc.text(skill, { align: 'left', fontSize: 16 });
+  }
+
+  doc.text('Experience', { align: 'left', fontSize: 18 });
+  for (const exp of experience) {
+    doc.text(exp.title, { align: 'left', fontSize: 16 });
+    doc.text(exp.company, { align: 'left', fontSize: 16 });
+    doc.text(exp.description, { align: 'left', fontSize: 14 });
+  }
+
+  doc.end();
+
+  res.setHeader('Content-Type', 'application/pdf');
+  res.send(doc.buffer());
+});
+
+app.listen(3000, () => {
+  console.log('Server is listening on port 3000');
+});
+
+import React, { useState } from
+ 
+'react';
+import axios from
+ 
+'axios';
+
+const App = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [skills, setSkills] = useState([]);
+  const [experience, setExperience] = useState([]);
+
+  const handleSubmit = async () => {
+    const response = await axios.post('/generate-resume', {
+      name,
+      email,
+      phone,
+      skills,
+      experience,
+    });
+
+    const pdf = response.data;
+
+    const blob = new Blob([pdf], { type: 'application/pdf' });
+    const url = URL.createObjectURL(blob);
+
+    window.open(url, '_blank');
+  };
+
+  return (
+    <div>
+      <h1>Resume Builder</h1>
+
+      
+<form
+ 
+onSubmit={handleSubmit}>
+
+        
+<input
+
+          
+type="text"
+
+          
+placeholder="Name"
+
+          
+value={name}
+
+          
+onChange={(e) => setName(e.target.value)}
+        />
+        <input
+
+          
+type="email"
+
+          
+placeholder="Email"
+          value={email}
+
+          
+onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+
+          
+type="tel"
+
+          
+placeholder="Phone"
+
+value={phone}
+
+          
+onChange={(e) => setPhone(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Skills (comma separated)"
+          value={skills.join(', ')}
+          onChange={(e) => setSkills(e.target.value.split(','))}
+        />
+        <input
+          type="text"
+          placeholder="Experience (JSON object)"
+          value={JSON.stringify(experience)}
+          onChange={(e) => setExperience(JSON.parse(e.target.value))}
+        />
+        <button type="submit">Generate Resume</button>
+      </form>
