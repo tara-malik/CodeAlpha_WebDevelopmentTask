@@ -1,0 +1,64 @@
+var dob = new Date(document.getElementById('dob').value);
+
+  
+  var now = new Date();
+
+  
+  var ageDiff = now.getTime() - dob.getTime();
+
+  
+  var age = Math.floor(ageDiff / (1000 * 60 * 60 * 24 * 365));
+
+  
+  document.getElementById('age').innerHTML = age;
+}
+
+
+HTML
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Age Calculator</title>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+
+    form {
+      margin: 0 auto;
+      width: 300px;
+    }
+
+    input {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #000;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    #age {
+      font-size: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Age Calculator</h1>
+
+  <form>
+    <input type="date" id="dob" placeholder="Date of birth">
+    <input type="number" id="month" placeholder="Month of birth">
+    <input type="number" id="year" placeholder="Year of birth">
+    <button type="submit" id="submit">Calculate Age</button>
+  </form>
+
+  <p id="age"></p>
+</body>
+</html>
